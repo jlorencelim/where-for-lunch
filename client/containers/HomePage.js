@@ -1,12 +1,13 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Button from 'components/Button/Button';
-import placeActions from 'actions/placeActions';
-import conditionActions from 'actions/conditionActions';
-import Place from 'components/Place/Place';
-import Condition from 'components/Condition/Condition';
+import placeActions from '../actions/placeActions';
+import conditionActions from '../actions/conditionActions';
+import Button from '../components/Button/Button';
+import Place from '../components/Place/Place';
+import Condition from '../components/Condition/Condition';
 
 class HomePage extends Component {
   handleOnClick = () => {
@@ -16,14 +17,20 @@ class HomePage extends Component {
   handleOnConditionChange = (value) => {
     this.props.setRadius(value);
   }
+
   render() {
     const { condition, place } = this.props;
+
     return (
       <div className="homePageWrapper">
         <Place place={place} />
         <div className="searchWrapper">
           <Condition condition={condition} action={this.handleOnConditionChange}/>
-          <Button onClick={this.handleOnClick} theme="homepageClick" />
+          <Button
+            onClick={this.handleOnClick}
+            theme="homepageClick"
+            disabled={_.isNull(condition.longitude) || _.isNull(condition.latitude)}
+          />
         </div>
       </div>
     );
