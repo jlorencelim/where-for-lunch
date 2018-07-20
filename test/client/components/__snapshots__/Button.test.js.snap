@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Jest snapshot, Button component renders as disabled 1`] = `
+<button
+  className="root homepageClick disabled"
+  disabled={true}
+/>
+`;
+
+exports[`With Jest snapshot, Button component renders as enabled 1`] = `
+<button
+  className="root homepageClick"
+  disabled={false}
+/>
+`;
