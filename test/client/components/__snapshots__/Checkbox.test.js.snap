@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With Jest snapshot, Button component renders with label and value 1`] = `
+<div
+  className="root"
+>
+  <input
+    type="checkbox"
+    value={1}
+  />
+  <label>
+    $
+  </label>
+</div>
+`;
