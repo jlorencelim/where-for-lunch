@@ -8,7 +8,10 @@ import {
 
 function* fetchPlace(action) {
   try {
-    const places = yield call(getPlaceIds, action.payload);
+    const data = { ...action.payload };
+    data.price = data.price.join(',');
+
+    const places = yield call(getPlaceIds, data);
     const randomPlace = getRandom(places);
     yield put(placeActions.setDetails(randomPlace));
   } catch (e) {
