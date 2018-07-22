@@ -29,7 +29,7 @@ test('With Enzyme, Place component not renders carousel when place has no photos
   expect(p.length).toBe(0);
 });
 
-test('With Enzyme, Place component renders carousel when place has photos', () => {
+test('With Jest snapshot, Place component renders carousel when place has photos', () => {
   const place = { hehe: 'haha', photos: ['photo.png'] };
   const wrapper = shallow(
     <Place place={place} detailedData />,
@@ -47,11 +47,29 @@ test('With Enzyme, Place component renders detail link when not detailed', () =>
   expect(p.length).toBe(1);
 });
 
-test('With Enzyme, Place component not renders link when datailed', () => {
+test('With Jest snapshot, Place component not renders link when datailed', () => {
   const place = { hehe: 'haha', id: 1 };
   const wrapper = shallow(
     <Place place={place} detailedData />,
   );
   const p = wrapper.find('.link');
   expect(p.length).toBe(0);
+});
+
+test('With Enzyme, Place component not renders map if place has no coordinates', () => {
+  const place = { hehe: 'haha' };
+  const wrapper = shallow(
+    <Place place={place} detailedData />,
+  );
+  const p = wrapper.find('.map');
+  expect(p.length).toBe(0);
+});
+
+test('With Enzyme, Place component renders map if place has coordinates', () => {
+  const place = { hehe: 'haha', longitude: 1.00, latitude: 1.00 };
+  const wrapper = shallow(
+    <Place place={place} detailedData />,
+  );
+  const p = wrapper.find('.map');
+  expect(p.length).toBe(1);
 });
