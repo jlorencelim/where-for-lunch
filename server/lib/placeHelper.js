@@ -26,3 +26,19 @@ export function fromSearchPlacesParams(params) {
   };
   return result;
 }
+
+export function fromGetPlacesParams(params) {
+  const result = {
+    rating: params.rating,
+    price: params.price,
+    phone: params.phone,
+    id: params.id,
+    name: params.name,
+    img: params.image_url,
+    photos: params.photos,
+    address: params.location.display_address.join(', '),
+    categories: params.categories ? params.categories.map(c => c.title) : null,
+    reviewCount: params.review_count,
+  };
+  return result;
+}
