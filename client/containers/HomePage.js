@@ -27,7 +27,7 @@ class HomePage extends Component {
 
     return (
       <div className="homePageWrapper">
-        <Place place={place} />
+        <Place place={place} detailedData={false} />
         <div className="searchWrapper">
           <Condition
             condition={condition}

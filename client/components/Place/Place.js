@@ -1,23 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Carousel from 'nuka-carousel';
 import styles from './Place.css';
 
-const Place = ({ place }) => {
+const Place = ({ place, detailedData }) => {
+  const {
+    id,
+    name = 'Where for lunch?',
+    address,
+    phone,
+    categories,
+    price,
+    rating,
+    reviewCount,
+    photos = [],
+  } = place;
+
   return (
     <div className={styles.root}>
-      <div className={styles.name}>{ place.name || 'Where for lunch?' }</div>
+      <div className={styles.name}>{ name }</div>
       <div className={styles.box}>
-        <div>{ place.address }</div>
-        <div>{ place.phone }</div>
-        <div>{ place.categories && place.categories.join(', ') }</div>
-        <div>{ place.price }</div>
-        { place.rating &&
+        {/* carousel images */}
+        {
+          (detailedData && photos.length > 0) &&
+          <Carousel className={styles.carousel} initialSlideHeight={300}>
+            { photos.map(photo => <img key={photo} src={photo} />) }
+          </Carousel>
+        }
+        <div>{ address }</div>
+        <div>{ phone }</div>
+        <div>{ categories && categories.join(', ') }</div>
+        <div>{ price }</div>
+        { rating &&
         <div className={styles.rating}>
-          <div className={styles.ratingScore}>{ place.reviewCount } reviews</div>
+          <div className={styles.ratingScore}>{ reviewCount } reviews</div>
           <div className={styles.stars}>
             <div className={styles.emptyStars}></div>
-            <div className={styles.fullStars} style={{ width: `${place.rating / 5 * 100}%` }}></div>
+            <div className={styles.fullStars} style={{ width: `${rating / 5 * 100}%` }}></div>
           </div>
+        </div>
+        }
+        {/* show link only if showing simple data */}
+        { (id && !detailedData) &&
+        <div className={styles.linkContainer}>
+          <Link to={`/place/${id}`} className={styles.link}>Details</Link>
         </div>
         }
       </div>
@@ -27,6 +54,7 @@ const Place = ({ place }) => {
 
 Place.propTypes = {
   place: PropTypes.object,
+  detailedData: PropTypes.bool,
 };
 
 export default Place;
