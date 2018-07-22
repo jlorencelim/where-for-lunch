@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Carousel from 'nuka-carousel';
 import styles from './Place.css';
+import Map from '../Map/Map';
 
 const Place = ({ place, detailedData }) => {
   const {
@@ -15,6 +17,8 @@ const Place = ({ place, detailedData }) => {
     rating,
     reviewCount,
     photos = [],
+    longitude = null,
+    latitude = null,
   } = place;
 
   return (
@@ -41,6 +45,14 @@ const Place = ({ place, detailedData }) => {
           </div>
         </div>
         }
+
+        {/* Google Map */}
+        { (detailedData && !_.isNull(longitude) && !_.isNull(latitude)) &&
+        <div className={styles.map}>
+          <Map longitude={longitude} latitude={latitude} />
+        </div>
+        }
+
         {/* show link only if showing simple data */}
         { (id && !detailedData) &&
         <div className={styles.linkContainer}>

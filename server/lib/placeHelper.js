@@ -39,6 +39,8 @@ export function fromGetPlacesParams(params) {
     address: params.location.display_address.join(', '),
     categories: params.categories ? params.categories.map(c => c.title) : null,
     reviewCount: params.review_count,
+    longitude: params.coordinates.longitude,
+    latitude: params.coordinates.latitude,
   };
   return result;
 }
